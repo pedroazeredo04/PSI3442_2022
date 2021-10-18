@@ -24,9 +24,6 @@
             <scale>0.001 0.001 0.001</scale>
             <uri>model://parede/meshes/another_brick_in_the_wall.stl</uri>
           </mesh>
-          <!-- <box>
-            <size>0.5 0.5 0.2</size>
-          </box> -->
         </geometry>
         <material>
           <script>
@@ -34,8 +31,7 @@
             <uri>file://media/materials/scripts/gazebo.material</uri>
           </script>
         </material>
-        <!-- <transparency>0</transparency> -->
-        <cast_shadows>1</cast_shadows>
+        <cast_shadows>0</cast_shadows>
       </visual>
 
       <collision name="collision">
@@ -44,9 +40,6 @@
             <scale>0.001 0.001 0.001</scale>
             <uri>model://parede/meshes/another_brick_in_the_wall.stl</uri>
           </mesh>
-          <!-- <box>
-            <size>0.5 0.5 0.2</size>
-          </box> -->
         </geometry>
       </collision>
 

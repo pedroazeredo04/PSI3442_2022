@@ -23,11 +23,15 @@ source scripts/setup.bash
 
 # Para abrir a simulação
 roslaunch p1_psi3442 simulate.launch
+
+# Para testar: use um comando de decolagem
+# No próprio terminal em que executou o comando acima
+commander takeoff
 ```
 
 ## Executando código
 
-Cada questão que possui código deve ser resolvida em um único arquivo. O código pode ser feito em C++ (nos arquivos `src/q2.cpp` e `src/q2.cpp`) ou em Python (nos arquivos `scripts/q2.py` e `scripts/q3.py`).
+Cada questão que possui código deve ser resolvida em um único arquivo. O código pode ser feito em C++ (nos arquivos `src/q2_A.cpp`, `src/q2_B.cpp` e `src/q3.cpp`) ou em Python (nos arquivos `scripts/q2_A.py`, `scripts/q2_B.py` e `scripts/q3.py`).
 
 **Atenção**: depois de modificar os códigos em C++, é necessário recompilar
 ```bash
