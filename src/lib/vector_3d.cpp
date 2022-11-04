@@ -2,9 +2,9 @@
 
 #include "lib/vector_3d.h"
 
-static constexpr double max_diff{0.05};
+static constexpr double max_diff{0.1};
 
-Vector3D::Vector3D(double x, double y, double z) : 
+Vector3D::Vector3D(double x, double y, double z) :
     x{x}, y{y}, z{z} {
     this->pose_msg.pose.position.x = x;
     this->pose_msg.pose.position.y = y;

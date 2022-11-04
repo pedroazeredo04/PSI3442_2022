@@ -10,7 +10,7 @@ typedef enum q1_fsm_state {
     LANDING
 } q1_fsm_state;
 
-class Drone{
+class Drone {
     public:
         // Constructors and Destructors
         Drone() = default;
@@ -19,17 +19,22 @@ class Drone{
 
         // Setters
         void set_setpoint(geometry_msgs::PoseStamped setpoint);
+
         void set_state(const mavros_msgs::State::ConstPtr& msg);
+
         void set_pose(const geometry_msgs::PoseStamped::ConstPtr& msg);
 
         // Getters
         geometry_msgs::PoseStamped get_pose();
+
         mavros_msgs::State get_mavros_state();
+
         geometry_msgs::PoseStamped get_setpoint();
 
         ros::Subscriber state_sub;
         ros::Subscriber pose_sub;
         ros::Publisher pose_setpoint_pub;
+        ros::Publisher vel_setpoint_pub;
         ros::ServiceClient arming_client;
         ros::ServiceClient set_mode_client;
 
@@ -41,4 +46,4 @@ class Drone{
         mavros_msgs::State mavros_state;
 };
 
-#endif  // __DRONE_H__
+#endif // __DRONE_H__

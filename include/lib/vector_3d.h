@@ -17,10 +17,11 @@ class Vector3D {
 
         // Operators Overloads
         bool operator !=(const geometry_msgs::PoseStamped other_pose) const;
+
         bool operator ==(const geometry_msgs::PoseStamped other_pose) const;
 
     private:
         geometry_msgs::PoseStamped pose_msg;
 };
 
-#endif  // __VECTOR_3D_H__
+#endif // __VECTOR_3D_H__
