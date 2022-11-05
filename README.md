@@ -43,8 +43,6 @@ commander takeoff
 
 ## Executando código
 
-Cada questão que possui código deve ser resolvida em um único arquivo. O código pode ser feito em C++ (nos arquivos `src/q2_A.cpp`, `src/q2_B.cpp` e `src/q3.cpp`) ou em Python (nos arquivos `scripts/q2_A.py`, `scripts/q2_B.py` e `scripts/q3.py`).
-
 **Atenção**: depois de modificar os códigos em C++, é necessário recompilar
 
 ```bash
@@ -54,9 +52,13 @@ source devel/setup.bash
 ```
 
 Para executar um programa, basta ter a simulação aberta e utilizar o comando `rosrun`.
+Para escolher o caminho a ser tomado, pode-se usar a flag `_flight_route`.
+
+- `_flight_route:=1` - Trajeto que faz as três bordas do quadrado.
+- `_flight_route:=2` - Trajeto que faz a diagonal do quadrado.
+
+Assim, o comando para executar o código fica:
 
 ```bash
-# Use o comando correspondente à lingua utilizada
-rosrun p1_psi3442 q2.py # Python
-rosrun p1_psi3442 q2 # C++
+rosrun p1_psi3442 q1_node _flight_route:=1
 ```
