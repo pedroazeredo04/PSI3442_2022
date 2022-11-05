@@ -9,11 +9,11 @@ export GAZEBO_MODEL_PATH=${PACKAGE_DIR}/models:${GAZEBO_MODEL_PATH}
 export GAZEBO_PLUGIN_PATH=${PACKAGE_DIR}/../../devel/lib:${GAZEBO_PLUGIN_PATH}
 
 # Setup Gazebo to find PX4
-source ${FIRMWARE_DIR}/Tools/setup_gazebo.bash ${FIRMWARE_DIR} ${FIRMWARE_BUILD_DIR}
+source ${FIRMWARE_DIR}/Tools/simulation/gazebo/setup_gazebo.bash ${FIRMWARE_DIR} ${FIRMWARE_BUILD_DIR}
 
 # Setup ROS to find the PX4 packages
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:${FIRMWARE_DIR}
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:${FIRMWARE_DIR}/Tools/sitl_gazebo
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:${FIRMWARE_DIR}/Tools/simulation/gazebo/sitl_gazebo
 echo -e "ROS_PACKAGE_PATH $ROS_PACKAGE_PATH"
 
 popd
