@@ -37,7 +37,6 @@ class Drone {
         ros::Subscriber battery_sub;
         ros::Subscriber velocity_sub;
         ros::Publisher pose_setpoint_pub;
-        ros::Publisher vel_setpoint_pub;
         ros::ServiceClient set_mode_client;
         ros::ServiceClient arming_client;
 
