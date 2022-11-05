@@ -51,15 +51,19 @@ int main(int argc, char * argv[]) {
     mavros_msgs::CommandBool arm_cmd;
     arm_cmd.request.value = true;
 
-    ros::Time last_request = ros::Time::now();
-    ros::Time state_enter_time = ros::Time::now();
+    static ros::Time last_request = ros::Time::now();
+    static ros::Time state_enter_time = ros::Time::now();
 
-    bool landed = false;
-    bool offboard = false;
+    static bool landed = false;
+    static bool offboard = false;
+    static bool landing = false;
+    static bool first_time_state = true;
+    static int mission_number = 0;
 
     while (ros::ok() and not landed) {
-        if ((drone.get_mavros_state().mode != "OFFBOARD") &&
-            (ros::Time::now() - last_request > ros::Duration(5.0))) {
+        if ((drone.get_mavros_state().mode != "OFFBOARD") and
+            (ros::Time::now() - last_request > ros::Duration(5.0)) and
+            not offboard) {
             if (drone.set_mode_client.call(offb_set_mode) &&
                 offb_set_mode.response.mode_sent) {
                 ROS_INFO("Offboard enabled");
@@ -79,13 +83,9 @@ int main(int argc, char * argv[]) {
             }
         }
 
-        // static q1_fsm_state fsm_state = TAKEOFF;
-        static bool first_time_state = true;
-        static int mission_number = 0;
-
-        if (drone.get_mavros_state().armed and offboard) {
+        if (drone.get_mavros_state().armed and offboard and not landing) {
             if (first_time_state) {
-                ROS_INFO("New state achieved");
+                ROS_INFO("New setpoint sent");
                 drone.set_setpoint(desired_points[mission_number].to_pose());
                 first_time_state = false;
                 state_enter_time = ros::Time::now();
@@ -95,27 +95,37 @@ int main(int argc, char * argv[]) {
                 ros::Time::now() - state_enter_time > tolerance_time) {
                 mission_number += 1;
                 first_time_state = true;
-            }
 
-            // Deals with landing
-            if (mission_number == desired_points.size()) {
-                if ((drone.get_mavros_state().mode != "AUTO.LAND") &&
-                    (ros::Time::now() - last_request > ros::Duration(5.0))) {
-                    if (drone.set_mode_client.call(land_set_mode) &&
-                        land_set_mode.response.mode_sent) {
-                        ROS_INFO("Landing drone");
-                        landed = true;
-                    }
-
-                    last_request = ros::Time::now();
-                }
+                std::cout << "Current drone energy: " << drone.get_energy() << std::endl;
             }
 
             drone.pose_setpoint_pub.publish(drone.get_setpoint());
         } else {
-            drone.pose_setpoint_pub.publish(Vector3D{0, 0, 0}.to_pose());
+            drone.pose_setpoint_pub.publish(Vector3D{0}.to_pose());
         }
 
+        // Deals with landing
+        if (mission_number == desired_points.size()) {
+            if ((drone.get_mavros_state().mode != "AUTO.LAND") &&
+                (ros::Time::now() - last_request > ros::Duration(5.0))) {
+                if (drone.set_mode_client.call(land_set_mode) &&
+                    land_set_mode.response.mode_sent) {
+                    ROS_INFO("Landing drone");
+                    landing = true;
+                    state_enter_time = ros::Time::now();  // landing enter time
+                }
+
+                last_request = ros::Time::now();
+            }
+        }
+
+        if (landing and ros::Time::now() - state_enter_time > tolerance_time) {
+            ROS_INFO("Landed drone");
+            std::cout << "Final energy: " << drone.get_energy() << std::endl;
+            landed = true;
+        }
+
+        drone.calculate_energy();
         ros::spinOnce();
         rate.sleep();
     }

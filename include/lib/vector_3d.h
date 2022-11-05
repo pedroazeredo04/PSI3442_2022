@@ -11,13 +11,12 @@ class Vector3D {
 
         Vector3D() = default;
         Vector3D(double x, double y, double z);
+        Vector3D(double value);
         virtual ~Vector3D() = default;
 
         geometry_msgs::PoseStamped to_pose();
 
         // Operators Overloads
-        bool operator !=(const geometry_msgs::PoseStamped other_pose) const;
-
         bool operator ==(const geometry_msgs::PoseStamped other_pose) const;
 
     private:
