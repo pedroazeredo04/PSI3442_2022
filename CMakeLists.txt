@@ -136,6 +136,7 @@ add_library(${PROJECT_NAME}
 
 add_executable(q1_node src/bin/q1_node.cpp)
 add_executable(q2_node src/bin/q2_node.cpp)
+add_executable(p2_node src/bin/p2_node.cpp)
 
 add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
@@ -148,3 +149,9 @@ target_link_libraries(q2_node
   ${PROJECT_NAME}
   ${catkin_LIBRARIES}
 )
+
+target_link_libraries(p2_node
+  ${PROJECT_NAME}
+  ${catkin_LIBRARIES}
+)
+

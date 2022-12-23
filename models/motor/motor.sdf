@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<sdf version='1.5'>
+  <model name='motor'>
+
+    <static>true</static>
+    <link name="link">
+      <pose>0 0 0 0 0 0</pose>
+
+      <inertial>
+        <mass>1</mass>
+        <inertia>
+          <ixx>0.166666</ixx>
+          <iyy>0.166666</iyy>
+          <izz>0.166666</izz>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyz>0</iyz>
+        </inertia>
+      </inertial>
+
+      <visual name="visual">
+        <geometry>
+           <box size="1 1 2"/>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Grey</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+        <cast_shadows>0</cast_shadows>
+      </visual>
+
+      <collision name="collision">
+        <geometry>
+          <box size="1 1 2"/>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>

@@ -20,6 +20,18 @@
         <pose>4 1 0 0 0 1.57</pose>
     </include>
 
+    <!-- Balão -->
+    <include>
+          <uri>model://balloon</uri>
+          <pose>4 4 7.5 0 0 0 </pose>
+    </include>
+
+    <!-- Motor Balão -->
+    <include>
+          <uri>model://motor</uri>
+          <pose>4 4 3 0 0 0 </pose>
+    </include>
+
     <!-- Física -->
     <physics name='default_physics' default='0' type='ode'>
       <gravity>0 0 -9.8066</gravity>

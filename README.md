@@ -57,8 +57,14 @@ Para escolher o caminho a ser tomado, pode-se usar a flag `_flight_route`.
 - `_flight_route:=1` - Trajeto que faz as três bordas do quadrado.
 - `_flight_route:=2` - Trajeto que faz a diagonal do quadrado.
 
-Assim, o comando para executar o código fica:
+Assim, o comando para executar o código da P1 fica:
 
 ```bash
 rosrun p1_psi3442 q1_node _flight_route:=1
+```
+
+E o comando para executar o código da P2, fica:
+
+```bash
+rosrun p1_psi3442 p2_node
 ```
